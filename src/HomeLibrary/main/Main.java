@@ -32,10 +32,10 @@ public class Main {
 
         Users users = new Users();
         UserLogic userLogic = new UserLogic();
-        userLogic.addUsersFromTXT("IdeaProjects\\classes\\out\\production\\classes\\by\\epam\\tasks6\\task1\\user\\users.txt", users);
+        userLogic.addUsersFromTXT("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\user\\users.txt", users);
         Library library = new Library();
         LibraryLogic libraryLogic = new LibraryLogic();
-        libraryLogic.addBooksFromTXT("IdeaProjects\\classes\\out\\production\\classes\\by\\epam\\tasks6\\task1\\library\\Library.txt", library);
+        libraryLogic.addBooksFromTXT("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\library\\Library.txt", library);
 
         boolean bool = false;
         do {

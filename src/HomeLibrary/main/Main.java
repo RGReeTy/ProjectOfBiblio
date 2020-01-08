@@ -15,8 +15,6 @@ package HomeLibrary.main;
 //
 //        P.S. По умолчанию логин администратора: administrator пароль: 0000
 
-
-
 import HomeLibrary.library.Library;
 import HomeLibrary.library.LibraryLogic;
 import HomeLibrary.user.User;
@@ -43,28 +41,21 @@ public class Main {
             if (userLogic.isCorrectUser(user, users)) {
                 if (userLogic.isAdmin(user)) {
                     System.out.println("cool");
-                    user = userLogic.getUserWithEMail(user,users);
+                    user = userLogic.getUserWithEMail(user, users);
                     RunAsAdmin runAsAdmin = new RunAsAdmin();
-                    runAsAdmin.runAsAdmin(users,library,user);
+                    runAsAdmin.runAsAdmin(users, library, user);
                     bool = true;
 
 
-                } else{
-                    user = userLogic.getUserWithEMail(user,users);
+                } else {
+                    user = userLogic.getUserWithEMail(user, users);
                     RunAsUser runAsUser = new RunAsUser();
-                    runAsUser.runAsUser(user,users,library);
+                    runAsUser.runAsUser(user, users, library);
                     bool = true;
                 }
-            }else {
+            } else {
                 System.out.println("Нету такого пользователя");
             }
         } while (!bool);
     }
 }
-
-
-//        EmailAuthenticator emailAuthenticator = new EmailAuthenticator();
-//        SendEmail sendEmail = new SendEmail();
-//        sendEmail.sendEmail(emailAuthenticator);
-
-

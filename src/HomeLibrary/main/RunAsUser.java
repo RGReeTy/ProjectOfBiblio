@@ -3,8 +3,6 @@ package HomeLibrary.main;
 
 import HomeLibrary.library.Library;
 import HomeLibrary.library.LibraryLogic;
-import HomeLibrary.mail.EmailAuthenticator;
-import HomeLibrary.mail.SendEmail;
 import HomeLibrary.user.User;
 import HomeLibrary.user.Users;
 import HomeLibrary.view.View;
@@ -26,7 +24,7 @@ public class RunAsUser {
 
         boolean bool = false;
         do {
-            System.out.println("1 - Посмотреть каталог, 2 - Поиск книг в каталоге ,3 - предложить книгу администратору, 4 выйти");
+            System.out.println("1 - Посмотреть каталог, 2 - Поиск книг в каталоге , 3 - предложить книгу администратору, 4 выйти");
 
             if (scanner.hasNextInt()) {
 
@@ -72,9 +70,9 @@ public class RunAsUser {
                 String password = "Password";
                 System.out.println("Спасибо");
 
-                EmailAuthenticator emailAuthenticator = new EmailAuthenticator(user.geteMail(), password);
-                SendEmail sendEmail = new SendEmail();
-                sendEmail.sendEmailAsUser(emailAuthenticator, user, text);
+//                EmailAuthenticator emailAuthenticator = new EmailAuthenticator(user.geteMail(), password);
+//                SendEmail sendEmail = new SendEmail();
+//                sendEmail.sendEmailAsUser(emailAuthenticator, user, text);
                 runAsUser(user, users, library);
 
                 break;

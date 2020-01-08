@@ -3,8 +3,6 @@ package HomeLibrary.main;
 import HomeLibrary.library.Book;
 import HomeLibrary.library.Library;
 import HomeLibrary.library.LibraryLogic;
-import HomeLibrary.mail.EmailAuthenticator;
-import HomeLibrary.mail.SendEmail;
 import HomeLibrary.user.User;
 import HomeLibrary.user.Users;
 import HomeLibrary.view.View;
@@ -26,7 +24,7 @@ public class RunAsAdmin {
 
         boolean bool = false;
         do {
-            System.out.println("1 - Посмотреть каталог, 2 - Добавить книгу ,3 - Удалить книгу, 4 выйти");
+            System.out.println("1 - Посмотреть каталог, 2 - Добавить книгу , 3 - Удалить книгу, 4 - Выйти");
 
 
             if (scanner.hasNextInt()) {
@@ -58,11 +56,11 @@ public class RunAsAdmin {
 
                 Book newBook = libraryLogic.addNewBookToLibrary(library);
 
-                EmailAuthenticator emailAuthenticator = new EmailAuthenticator(user.geteMail(), "AdminPassword");
-                SendEmail sendEmail = new SendEmail();
-                for (User userToSend : users.getUsers()) {
-                    sendEmail.sendEmailAsAdministrator(emailAuthenticator, userToSend, newBook);
-                }
+//                //EmailAuthenticator emailAuthenticator = new EmailAuthenticator(user.geteMail(), "AdminPassword");
+//                //SendEmail sendEmail = new SendEmail();
+//               // for (User userToSend : users.getUsers()) {
+//                    sendEmail.sendEmailAsAdministrator(emailAuthenticator, userToSend, newBook);
+//                }
                 libraryLogic.saveLibraryToTXT(newBook);
                 runAsAdmin(users, library, user);
 

@@ -5,9 +5,9 @@ import java.util.Arrays;
 public class Users {
     private User[] users = new User[0];
 
-    public void addUser(User user){
-        users = Arrays.copyOf(users,users.length+1);
-        users[users.length-1]=user;
+    public void addUser(User user) {
+        users = Arrays.copyOf(users, users.length + 1);
+        users[users.length - 1] = user;
     }
 
     public User[] getUsers() {

@@ -54,7 +54,7 @@ public class Main {
                     bool = true;
                 }
             } else {
-                System.out.println("Нету такого пользователя");
+                System.out.println("That user does not exist!");
             }
         } while (!bool);
     }

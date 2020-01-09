@@ -68,10 +68,10 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Книга - " + bookName + '\'' +
-                ", Автор - " + author + '\'' +
-                ", Тип книги - " + typeOfBook + '\'' +
-                ", О книге - " + aboutBook + '\'' +
+        return "Book - " + bookName + '\'' +
+                ", Author - " + author + '\'' +
+                ", Type of book - " + typeOfBook + '\'' +
+                ", About - " + aboutBook + '\'' +
                 '}';
     }
 }

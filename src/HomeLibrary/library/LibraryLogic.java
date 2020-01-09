@@ -16,9 +16,7 @@ public class LibraryLogic {
         Matcher matcher = pattern.matcher(BooksInString);
 
         while (matcher.find()) {
-
             library.addBook(new Book(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4)));
-
         }
     }
 
@@ -36,13 +34,13 @@ public class LibraryLogic {
 
     public Book addNewBookToLibrary(Library library) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Введите Название книги");
+        System.out.println("Enter book's name..");
         String bookName = reader.readLine();
-        System.out.println("Введите Автора");
+        System.out.println("Enter author's name..");
         String author = reader.readLine();
-        System.out.println("Введите тип книги (электронная,бумажная)");
+        System.out.println("Enter type of book..");
         String typeOfBook = reader.readLine();
-        System.out.println("Введите описание");
+        System.out.println("What about this book..");
         String info = reader.readLine();
 
         return new Book(bookName, author, typeOfBook, info);
@@ -50,7 +48,7 @@ public class LibraryLogic {
     }
 
     public void saveLibraryToTXT(Book book) {
-        try (FileWriter writer = new FileWriter("C:\\Users\\Valeronij\\IdeaProjects\\classes\\out\\production\\classes\\by\\epam\\tasks6\\task1\\library\\Library.txt", true)) {
+        try (FileWriter writer = new FileWriter("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\library\\Library.txt", true)) {
 
             writer.append(System.lineSeparator());
             writer.write(book.getBookName() + " + " + book.getAuthor() + " + " + book.getTypeOfBook() + " + " + book.getAboutBook() + "@");
@@ -63,13 +61,11 @@ public class LibraryLogic {
     }
 
     public void saveLibraryToTXTDelete(Library library) {
-        try (FileWriter writer = new FileWriter("C:\\Users\\Valeronij\\IdeaProjects\\classes\\out\\production\\classes\\by\\epam\\tasks6\\task1\\library\\Library.txt", false)) {
+        try (FileWriter writer = new FileWriter("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\library\\Library.txt", false)) {
             for (Book book : library.getBooks()) {
                 writer.append(System.lineSeparator());
                 writer.write(book.getBookName() + " + " + book.getAuthor() + " + " + book.getTypeOfBook() + " + " + book.getAboutBook() + "@");
             }
-
-
             writer.flush();
         } catch (IOException ex) {
 

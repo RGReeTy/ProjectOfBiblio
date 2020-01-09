@@ -24,8 +24,7 @@ public class RunAsAdmin {
 
         boolean bool = false;
         do {
-            System.out.println("1 - Посмотреть каталог, 2 - Добавить книгу , 3 - Удалить книгу, 4 - Выйти");
-
+            System.out.println("1 - Watch library, 2 - Add book to the library, 3 - Delete book, 4 - Quit");
 
             if (scanner.hasNextInt()) {
 

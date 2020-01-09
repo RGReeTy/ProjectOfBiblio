@@ -32,18 +32,15 @@ public class UserLogic {
 
     public boolean isAdmin(User user) {
 
-        if (user.getUserName().equals("administrator")) {
-            return true;
-        }
-        return false;
+        return user.getUserName().equals("administrator");
     }
 
     public User getUser() {
         User user = new User();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите логин");
+        System.out.println("Enter login");
         user.setUserName(scanner.next());
-        System.out.println("Введите пароль");
+        System.out.println("Enter password");
         user.setUserPassword(scanner.next());
         return user;
     }

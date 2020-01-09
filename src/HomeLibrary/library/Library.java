@@ -1,6 +1,5 @@
 package HomeLibrary.library;
 
-
 import java.util.Arrays;
 
 public class Library {
@@ -14,9 +13,9 @@ public class Library {
         return books;
     }
 
-    public void addBook (Book book){
-        books = Arrays.copyOf(books,books.length+1);
-        books[books.length-1]=book;
+    public void addBook(Book book) {
+        books = Arrays.copyOf(books, books.length + 1);
+        books[books.length - 1] = book;
     }
 
     public void setBooks(Book book, int indexOfBook) {

@@ -13,20 +13,20 @@ package HomeLibrary.main;
 //        • Каталог книг хранится в текстовом файле.
 //        • Данные аутентификации пользователей хранятся в текстовом файле. Пароль не хранится в открытом виде
 //
-//        P.S. По умолчанию логин администратора: administrator пароль: 0000
+//        P.S. По умолчанию логин администратора: admin пароль: 0000
 
 import HomeLibrary.library.Library;
 import HomeLibrary.library.LibraryLogic;
 import HomeLibrary.user.User;
 import HomeLibrary.user.UserLogic;
 import HomeLibrary.user.Users;
+import HomeLibrary.view.Print;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, FileNotFoundException {
+    public static void main(String[] args) throws IOException {
 
         Users users = new Users();
         UserLogic userLogic = new UserLogic();
@@ -40,7 +40,7 @@ public class Main {
             User user = userLogic.getUser();
             if (userLogic.isCorrectUser(user, users)) {
                 if (userLogic.isAdmin(user)) {
-                    System.out.println("cool");
+                    Print.printTheMessage("cool");
                     user = userLogic.getUserWithEMail(user, users);
                     RunAsAdmin runAsAdmin = new RunAsAdmin();
                     runAsAdmin.runAsAdmin(users, library, user);
@@ -54,7 +54,7 @@ public class Main {
                     bool = true;
                 }
             } else {
-                System.out.println("That user does not exist!");
+                Print.printTheMessage("That user does not exist!");
             }
         } while (!bool);
     }

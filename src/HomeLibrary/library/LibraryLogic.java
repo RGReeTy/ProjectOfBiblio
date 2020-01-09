@@ -1,5 +1,7 @@
 package HomeLibrary.library;
 
+import HomeLibrary.view.Print;
+
 import java.io.*;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -10,7 +12,7 @@ public class LibraryLogic {
     public void addBooksFromTXT(String address, Library library) throws FileNotFoundException {
 
         Scanner scanner = new Scanner(new File(address), "UTF-8");
-        String BooksInString = scanner.useDelimiter("\\A").next();
+        String BooksInString = scanner.useDelimiter("\\A").next(); // \\A - The beginning of the input(docs.oracle.com)
 
         Pattern pattern = Pattern.compile("([а-яА-яA-Za-z0-9 .,?!\"]+)\\+([а-яА-яA-Za-z0-9 .,?!\"]+)\\+([а-яА-яA-Za-z0-9 .,?!\"]+)\\+(.+)@");
         Matcher matcher = pattern.matcher(BooksInString);
@@ -34,13 +36,13 @@ public class LibraryLogic {
 
     public Book addNewBookToLibrary(Library library) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter book's name..");
+        Print.printTheMessage("Enter book's name..");
         String bookName = reader.readLine();
-        System.out.println("Enter author's name..");
+         Print.printTheMessage("Enter author's name..");
         String author = reader.readLine();
-        System.out.println("Enter type of book..");
+         Print.printTheMessage("Enter type of book..");
         String typeOfBook = reader.readLine();
-        System.out.println("What about this book..");
+         Print.printTheMessage("What about this book..");
         String info = reader.readLine();
 
         return new Book(bookName, author, typeOfBook, info);
@@ -56,7 +58,7 @@ public class LibraryLogic {
             writer.flush();
         } catch (IOException ex) {
 
-            System.out.println(ex.getMessage());
+             Print.printTheMessage(ex.getMessage());
         }
     }
 
@@ -69,7 +71,7 @@ public class LibraryLogic {
             writer.flush();
         } catch (IOException ex) {
 
-            System.out.println(ex.getMessage());
+             Print.printTheMessage(ex.getMessage());
         }
     }
 

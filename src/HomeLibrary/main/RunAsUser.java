@@ -1,10 +1,10 @@
 package HomeLibrary.main;
 
-
 import HomeLibrary.library.Library;
 import HomeLibrary.library.LibraryLogic;
 import HomeLibrary.user.User;
 import HomeLibrary.user.Users;
+import HomeLibrary.view.Print;
 import HomeLibrary.view.View;
 
 import java.io.BufferedReader;
@@ -24,7 +24,7 @@ public class RunAsUser {
 
         boolean bool = false;
         do {
-            System.out.println("1 - Watch library, 2 - Find book in the library, 3 - Ask to add book to administartor, 4 - Quit");
+             Print.printTheMessage("1 - Watch library, 2 - Find book in the library, 3 - Ask to add book to administartor, 4 - Quit");
 
             if (scanner.hasNextInt()) {
 
@@ -51,10 +51,10 @@ public class RunAsUser {
 
             case ("2"):
 
-                System.out.println("Что вы ищите?");
+                 Print.printTheMessage("What do you want to find?");
                 String stringFind = scanner.next();
                 if (libraryLogic.findTheBook(stringFind, library) != null) {
-                    System.out.println(libraryLogic.findTheBook(stringFind, library).toString());
+                     Print.printTheMessage(libraryLogic.findTheBook(stringFind, library).toString());
                 }
                 runAsUser(user, users, library);
 
@@ -64,11 +64,10 @@ public class RunAsUser {
 
             case ("3"):
 
-                System.out.println("Напишите о книге которую хотите предложить");
+                 Print.printTheMessage("Write something about book, which you want to offer..");
                 String text = reader.readLine();
 
-                String password = "Password";
-                System.out.println("Спасибо");
+                 Print.printTheMessage("Thanks");
 
                 runAsUser(user, users, library);
 
@@ -78,11 +77,8 @@ public class RunAsUser {
             ///////////////////////////////
 
             case ("4"):
-                System.out.println("Выход из программы");
+                 Print.printTheMessage("Quiting..");
                 break;
-
-            ///////////////////////////////
-
         }
     }
 }

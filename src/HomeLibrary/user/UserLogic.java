@@ -1,5 +1,7 @@
 package HomeLibrary.user;
 
+import HomeLibrary.view.Print;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -32,15 +34,15 @@ public class UserLogic {
 
     public boolean isAdmin(User user) {
 
-        return user.getUserName().equals("administrator");
+        return user.getUserName().equals("admin");
     }
 
     public User getUser() {
         User user = new User();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter login");
+        Print.printTheMessage("Enter login");
         user.setUserName(scanner.next());
-        System.out.println("Enter password");
+        Print.printTheMessage("Enter password");
         user.setUserPassword(scanner.next());
         return user;
     }

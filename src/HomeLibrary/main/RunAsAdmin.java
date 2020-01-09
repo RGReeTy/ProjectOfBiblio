@@ -5,6 +5,7 @@ import HomeLibrary.library.Library;
 import HomeLibrary.library.LibraryLogic;
 import HomeLibrary.user.User;
 import HomeLibrary.user.Users;
+import HomeLibrary.view.Print;
 import HomeLibrary.view.View;
 
 import java.io.BufferedReader;
@@ -24,7 +25,7 @@ public class RunAsAdmin {
 
         boolean bool = false;
         do {
-            System.out.println("1 - Watch library, 2 - Add book to the library, 3 - Delete book, 4 - Quit");
+             Print.printTheMessage("1 - Watch library, 2 - Add book to the library, 3 - Delete book, 4 - Quit");
 
             if (scanner.hasNextInt()) {
 
@@ -70,7 +71,7 @@ public class RunAsAdmin {
             case ("3"):
 
                 view.printBooks(library);
-                System.out.println("Выберите номер книги для удаления");
+                 Print.printTheMessage("Выберите номер книги для удаления");
 
                 int numberOfBook = scanner.nextInt();
 

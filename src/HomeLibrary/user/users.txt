@@ -1,3 +1,3 @@
-administrator 0000 valeryaleshka@gmail.com
-igor 2222 valery.aleshka@tut.by
-dadaika 4444 valeron@tut.by
+admin 0000 const.hsky@gmail.com
+test 2222 be.a.reety@gmail.com
+Epam 4444 epam@tut.by

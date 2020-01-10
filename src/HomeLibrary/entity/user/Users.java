@@ -1,4 +1,4 @@
-package HomeLibrary.user;
+package HomeLibrary.entity.user;
 
 import java.util.Arrays;
 

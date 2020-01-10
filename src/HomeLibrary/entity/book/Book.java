@@ -1,4 +1,4 @@
-package HomeLibrary.library;
+package HomeLibrary.entity.book;
 
 import java.util.Objects;
 
@@ -68,7 +68,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book - " + bookName + '\'' +
+        return getClass() + bookName + '\'' +
                 ", Author - " + author + '\'' +
                 ", Type of book - " + typeOfBook + '\'' +
                 ", About - " + aboutBook + '\'' +

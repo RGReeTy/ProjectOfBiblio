@@ -1,4 +1,4 @@
-package HomeLibrary.main;
+package HomeLibrary;
 
 //Задание 1: создать консольное приложение “Учет книг в домашней библиотеке”.
 //
@@ -15,11 +15,13 @@ package HomeLibrary.main;
 //
 //        P.S. По умолчанию логин администратора: admin пароль: 0000
 
-import HomeLibrary.library.Library;
-import HomeLibrary.library.LibraryLogic;
-import HomeLibrary.user.User;
-import HomeLibrary.user.UserLogic;
-import HomeLibrary.user.Users;
+import HomeLibrary.entity.library.Library;
+import HomeLibrary.service.LibraryLogic;
+import HomeLibrary.service.runner.RunAsAdmin;
+import HomeLibrary.service.runner.RunAsUser;
+import HomeLibrary.entity.user.User;
+import HomeLibrary.service.UserLogic;
+import HomeLibrary.entity.user.Users;
 import HomeLibrary.view.Print;
 
 import java.io.IOException;
@@ -29,9 +31,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Users users = new Users();
-        UserLogic.addUsersFromTXT("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\user\\users.txt", users);
+        //new FileReader("src\\PACKAGE_NAME\\FILENAME");
+        UserLogic.addUsersFromTXT("src\\HomeLibrary\\file\\users.txt", users);
         Library library = new Library();
-        LibraryLogic.addBooksFromTXT("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\library\\Library.txt", library);
+        LibraryLogic.addBooksFromTXT("src\\HomeLibrary\\file\\Library.txt", library);
 
         boolean bool = false;
         do {

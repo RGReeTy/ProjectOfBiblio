@@ -1,4 +1,4 @@
-package HomeLibrary.user;
+package HomeLibrary.entity.user;
 
 
 import java.util.Objects;
@@ -58,7 +58,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return getClass() +
                 "userName='" + userName + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", eMail='" + eMail + '\'' +

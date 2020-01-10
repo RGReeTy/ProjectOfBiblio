@@ -1,10 +1,10 @@
-package HomeLibrary.main;
+package HomeLibrary.service.runner;
 
-import HomeLibrary.library.Book;
-import HomeLibrary.library.Library;
-import HomeLibrary.library.LibraryLogic;
-import HomeLibrary.user.User;
-import HomeLibrary.user.Users;
+import HomeLibrary.entity.book.Book;
+import HomeLibrary.entity.library.Library;
+import HomeLibrary.service.LibraryLogic;
+import HomeLibrary.entity.user.User;
+import HomeLibrary.entity.user.Users;
 import HomeLibrary.view.Print;
 import HomeLibrary.view.View;
 
@@ -14,11 +14,10 @@ import java.util.Scanner;
 public class RunAsAdmin {
     public void runAsAdmin(Users users, Library library, User user) throws IOException {
 
-        View view = new View();
         Scanner scanner = new Scanner(System.in);
 
-        String choice = null;
         int choiceInt = 0;
+        int check = 0;
 
         boolean bool = false;
         do {
@@ -32,8 +31,8 @@ public class RunAsAdmin {
 
                 choiceInt = scanner.nextInt();
 
-                if (choiceInt > 0 && choiceInt < 5) {
-                    choice = Integer.toString(choiceInt);
+                if (choiceInt > 0 & choiceInt < 5) {
+                    check = choiceInt;
                     bool = true;
                 }
             } else scanner.next();
@@ -41,17 +40,16 @@ public class RunAsAdmin {
         } while (!bool);
 
 
-        switch (choiceInt) {
+        switch (check) {
 
             case (1):
 
-                view.printBooks(library);
+                View.printBooks(library);
                 runAsAdmin(users, library, user);
 
                 break;
 
-
-            //////////////////////////////////////////////////////////////////////////
+//--------------------------------------------------------------------------------------------------------------
 
             case (2):
 
@@ -62,11 +60,11 @@ public class RunAsAdmin {
 
 
                 break;
-///////////////////////////////
+//--------------------------------------------------------------------------------------------------------------
 
             case (3):
 
-                view.printBooks(library);
+                View.printBooks(library);
                 Print.printTheMessage("Choose a number of book for deleting..");
 
                 int numberOfBook = scanner.nextInt();
@@ -75,20 +73,16 @@ public class RunAsAdmin {
                 LibraryLogic.saveLibraryToTXTDelete(library);
 
 
-                view.printBooks(library);
+                View.printBooks(library);
                 runAsAdmin(users, library, user);
 
                 break;
 
-            ///////////////////////////////
-
+//--------------------------------------------------------------------------------------------------------------
 
             case (4):
-
                 break;
-
-            ///////////////////////////////
-
+//--------------------------------------------------------------------------------------------------------------
         }
     }
 }

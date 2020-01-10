@@ -1,4 +1,6 @@
-package HomeLibrary.library;
+package HomeLibrary.entity.library;
+
+import HomeLibrary.entity.book.Book;
 
 import java.util.Arrays;
 

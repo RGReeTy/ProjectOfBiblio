@@ -1,5 +1,7 @@
-package HomeLibrary.user;
+package HomeLibrary.service;
 
+import HomeLibrary.entity.user.User;
+import HomeLibrary.entity.user.Users;
 import HomeLibrary.view.Print;
 
 import java.io.File;

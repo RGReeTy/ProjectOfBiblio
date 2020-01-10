@@ -1,5 +1,7 @@
-package HomeLibrary.library;
+package HomeLibrary.service;
 
+import HomeLibrary.entity.book.Book;
+import HomeLibrary.entity.library.Library;
 import HomeLibrary.view.Print;
 
 import java.io.*;

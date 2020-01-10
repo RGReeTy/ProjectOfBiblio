@@ -53,8 +53,8 @@ public class RunAsUser {
 
                  Print.printTheMessage("What do you want to find?");
                 String stringFind = scanner.next();
-                if (libraryLogic.findTheBook(stringFind, library) != null) {
-                     Print.printTheMessage(libraryLogic.findTheBook(stringFind, library).toString());
+                if (LibraryLogic.findTheBook(stringFind, library) != null) {
+                     Print.printTheMessage(LibraryLogic.findTheBook(stringFind, library).toString());
                 }
                 runAsUser(user, users, library);
 

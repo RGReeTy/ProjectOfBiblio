@@ -8,28 +8,29 @@ import HomeLibrary.user.Users;
 import HomeLibrary.view.Print;
 import HomeLibrary.view.View;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class RunAsAdmin {
     public void runAsAdmin(Users users, Library library, User user) throws IOException {
 
-        LibraryLogic libraryLogic = new LibraryLogic();
         View view = new View();
         Scanner scanner = new Scanner(System.in);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         String choice = null;
+        int choiceInt = 0;
 
         boolean bool = false;
         do {
-             Print.printTheMessage("1 - Watch library, 2 - Add book to the library, 3 - Delete book, 4 - Quit");
+            Print.printTheMessage("" +
+                    "1 - Watch library, " +
+                    "2 - Add book to the library, " +
+                    "3 - Delete book, " +
+                    "4 - Quit");
 
             if (scanner.hasNextInt()) {
 
-                int choiceInt = scanner.nextInt();
+                choiceInt = scanner.nextInt();
 
                 if (choiceInt > 0 && choiceInt < 5) {
                     choice = Integer.toString(choiceInt);
@@ -40,9 +41,9 @@ public class RunAsAdmin {
         } while (!bool);
 
 
-        switch (choice) {
+        switch (choiceInt) {
 
-            case ("1"):
+            case (1):
 
                 view.printBooks(library);
                 runAsAdmin(users, library, user);
@@ -52,31 +53,26 @@ public class RunAsAdmin {
 
             //////////////////////////////////////////////////////////////////////////
 
-            case ("2"):
+            case (2):
 
-                Book newBook = libraryLogic.addNewBookToLibrary(library);
+                Book newBook = LibraryLogic.addNewBookToLibrary(library);
 
-//                //EmailAuthenticator emailAuthenticator = new EmailAuthenticator(user.geteMail(), "AdminPassword");
-//                //SendEmail sendEmail = new SendEmail();
-//               // for (User userToSend : users.getUsers()) {
-//                    sendEmail.sendEmailAsAdministrator(emailAuthenticator, userToSend, newBook);
-//                }
-                libraryLogic.saveLibraryToTXT(newBook);
+                LibraryLogic.saveLibraryToTXT(newBook);
                 runAsAdmin(users, library, user);
 
 
                 break;
 ///////////////////////////////
 
-            case ("3"):
+            case (3):
 
                 view.printBooks(library);
-                 Print.printTheMessage("Выберите номер книги для удаления");
+                Print.printTheMessage("Choose a number of book for deleting..");
 
                 int numberOfBook = scanner.nextInt();
 
-                library = libraryLogic.deleteBookFromLibrary(numberOfBook, library);
-                libraryLogic.saveLibraryToTXTDelete(library);
+                library = LibraryLogic.deleteBookFromLibrary(numberOfBook, library);
+                LibraryLogic.saveLibraryToTXTDelete(library);
 
 
                 view.printBooks(library);
@@ -87,7 +83,7 @@ public class RunAsAdmin {
             ///////////////////////////////
 
 
-            case ("4"):
+            case (4):
 
                 break;
 

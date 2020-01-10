@@ -29,26 +29,22 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Users users = new Users();
-        UserLogic userLogic = new UserLogic();
-        userLogic.addUsersFromTXT("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\user\\users.txt", users);
+        UserLogic.addUsersFromTXT("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\user\\users.txt", users);
         Library library = new Library();
-        LibraryLogic libraryLogic = new LibraryLogic();
-        libraryLogic.addBooksFromTXT("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\library\\Library.txt", library);
+        LibraryLogic.addBooksFromTXT("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\library\\Library.txt", library);
 
         boolean bool = false;
         do {
-            User user = userLogic.getUser();
-            if (userLogic.isCorrectUser(user, users)) {
-                if (userLogic.isAdmin(user)) {
-                    Print.printTheMessage("cool");
-                    user = userLogic.getUserWithEMail(user, users);
+            User user = UserLogic.getUser();
+            if (UserLogic.isCorrectUser(user, users)) {
+                if (UserLogic.isAdmin(user)) {
+                    Print.printTheMessage("Wake up Neo");
+                    user = UserLogic.getUserWithEMail(user, users);
                     RunAsAdmin runAsAdmin = new RunAsAdmin();
                     runAsAdmin.runAsAdmin(users, library, user);
                     bool = true;
-
-
                 } else {
-                    user = userLogic.getUserWithEMail(user, users);
+                    user = UserLogic.getUserWithEMail(user, users);
                     RunAsUser runAsUser = new RunAsUser();
                     runAsUser.runAsUser(user, users, library);
                     bool = true;

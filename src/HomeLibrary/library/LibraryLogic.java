@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class LibraryLogic {
 
-    public void addBooksFromTXT(String address, Library library) throws FileNotFoundException {
+    public static void addBooksFromTXT(String address, Library library) throws FileNotFoundException {
 
         Scanner scanner = new Scanner(new File(address), "UTF-8");
         String BooksInString = scanner.useDelimiter("\\A").next(); // \\A - The beginning of the input(docs.oracle.com)
@@ -22,7 +22,7 @@ public class LibraryLogic {
         }
     }
 
-    public Book findTheBook(String string, Library library) {
+    public static Book findTheBook(String string, Library library) {
         Pattern pattern = Pattern.compile(string.toLowerCase());
 
         for (Book book : library.getBooks()) {
@@ -34,7 +34,7 @@ public class LibraryLogic {
         return null;
     }
 
-    public Book addNewBookToLibrary(Library library) throws IOException {
+    public static Book addNewBookToLibrary(Library library) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Print.printTheMessage("Enter book's name..");
         String bookName = reader.readLine();
@@ -49,7 +49,7 @@ public class LibraryLogic {
 
     }
 
-    public void saveLibraryToTXT(Book book) {
+    public static void saveLibraryToTXT(Book book) {
         try (FileWriter writer = new FileWriter("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\library\\Library.txt", true)) {
 
             writer.append(System.lineSeparator());
@@ -62,7 +62,7 @@ public class LibraryLogic {
         }
     }
 
-    public void saveLibraryToTXTDelete(Library library) {
+    public static void saveLibraryToTXTDelete(Library library) {
         try (FileWriter writer = new FileWriter("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\library\\Library.txt", false)) {
             for (Book book : library.getBooks()) {
                 writer.append(System.lineSeparator());
@@ -75,7 +75,7 @@ public class LibraryLogic {
         }
     }
 
-    public Library deleteBookFromLibrary(int numberOfBook, Library library) {
+    public static Library deleteBookFromLibrary(int numberOfBook, Library library) {
         Library newLibrary = new Library();
 
         for (int i = 0; i < library.getBooks().length; i++) {

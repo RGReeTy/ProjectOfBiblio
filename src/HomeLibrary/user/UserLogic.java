@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class UserLogic {
 
-    public void addUsersFromTXT(String address, Users users) throws FileNotFoundException {
+    public static void addUsersFromTXT(String address, Users users) throws FileNotFoundException {
 
         Scanner scanner = new Scanner(new File(address), "UTF-8");
         String usersInString = scanner.useDelimiter("\\A").next();
@@ -23,7 +23,7 @@ public class UserLogic {
         }
     }
 
-    public boolean isCorrectUser(User user, Users users) {
+    public static boolean isCorrectUser(User user, Users users) {
         for (User userNew : users.getUsers()) {
             if (userNew.getUserName().equals(user.getUserName()) && userNew.getUserPassword().equals(user.getUserPassword())) {
                 return true;
@@ -32,12 +32,12 @@ public class UserLogic {
         return false;
     }
 
-    public boolean isAdmin(User user) {
+    public static boolean isAdmin(User user) {
 
         return user.getUserName().equals("admin");
     }
 
-    public User getUser() {
+    public static User getUser() {
         User user = new User();
         Scanner scanner = new Scanner(System.in);
         Print.printTheMessage("Enter login");
@@ -47,7 +47,7 @@ public class UserLogic {
         return user;
     }
 
-    public User getUserWithEMail(User user, Users users) {
+    public static User getUserWithEMail(User user, Users users) {
         for (User userNew : users.getUsers()) {
             if (userNew.getUserName().equals(user.getUserName()) && userNew.getUserPassword().equals(user.getUserPassword())) {
                 return userNew;

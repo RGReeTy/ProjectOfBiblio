@@ -31,7 +31,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Users users = new Users();
-        //new FileReader("src\\PACKAGE_NAME\\FILENAME");
         UserLogic.addUsersFromTXT("src\\HomeLibrary\\file\\users.txt", users);
         Library library = new Library();
         LibraryLogic.addBooksFromTXT("src\\HomeLibrary\\file\\Library.txt", library);

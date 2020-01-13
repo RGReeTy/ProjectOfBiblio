@@ -46,7 +46,6 @@ public class RunAsUser {
                 View.printBooks(library);
                 runAsUser(user, users, library);
                 break;
-
 //--------------------------------------------------------------------------------------------------------------
 
             case (2):
@@ -55,9 +54,10 @@ public class RunAsUser {
                 String stringFind = scanner.next();
                 if (LibraryLogic.findTheBook(stringFind, library) != null) {
                     Print.printTheMessage(Objects.requireNonNull(LibraryLogic.findTheBook(stringFind, library)).toString());
+                } else {
+                    Print.printTheMessage("Sorry, can't find any match like " + stringFind);
                 }
                 runAsUser(user, users, library);
-
 
                 break;
 //--------------------------------------------------------------------------------------------------------------
@@ -66,9 +66,7 @@ public class RunAsUser {
 
                 Print.printTheMessage("Write something about book, which you want to offer..");
                 String text = reader.readLine();
-
                 Print.printTheMessage("Thanks");
-
                 runAsUser(user, users, library);
 
                 break;

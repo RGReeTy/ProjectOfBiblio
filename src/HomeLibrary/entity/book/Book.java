@@ -68,10 +68,9 @@ public class Book {
 
     @Override
     public String toString() {
-        return getClass() + bookName + '\'' +
-                ", Author - " + author + '\'' +
-                ", Type of book - " + typeOfBook + '\'' +
-                ", About - " + aboutBook + '\'' +
-                '}';
+        return "Book - " + bookName +
+                ",\t Author - " + author +
+                ",\t Type of book - " + typeOfBook +
+                ",\t About - " + aboutBook;
     }
 }

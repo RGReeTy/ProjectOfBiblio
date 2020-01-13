@@ -52,11 +52,10 @@ public class LibraryLogic {
     }
 
     public static void saveLibraryToTXT(Book book) {
-        try (FileWriter writer = new FileWriter("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\library\\Library.txt", true)) {
+        try (FileWriter writer = new FileWriter("src\\HomeLibrary\\file\\Library.txt", true)) {
 
             writer.append(System.lineSeparator());
             writer.write(book.getBookName() + " + " + book.getAuthor() + " + " + book.getTypeOfBook() + " + " + book.getAboutBook() + "@");
-
             writer.flush();
         } catch (IOException ex) {
 
@@ -65,14 +64,13 @@ public class LibraryLogic {
     }
 
     public static void saveLibraryToTXTDelete(Library library) {
-        try (FileWriter writer = new FileWriter("C:\\Users\\RGReeTy\\IdeaProjects\\ProjectOfBiblio\\src\\HomeLibrary\\library\\Library.txt", false)) {
+        try (FileWriter writer = new FileWriter("src\\HomeLibrary\\file\\Library.txt", false)) {
             for (Book book : library.getBooks()) {
                 writer.append(System.lineSeparator());
                 writer.write(book.getBookName() + " + " + book.getAuthor() + " + " + book.getTypeOfBook() + " + " + book.getAboutBook() + "@");
             }
             writer.flush();
         } catch (IOException ex) {
-
              Print.printTheMessage(ex.getMessage());
         }
     }
@@ -84,10 +82,7 @@ public class LibraryLogic {
             if (i != numberOfBook) {
                 newLibrary.addBook(library.getBooks(i));
             }
-
         }
         return newLibrary;
     }
-
-
 }

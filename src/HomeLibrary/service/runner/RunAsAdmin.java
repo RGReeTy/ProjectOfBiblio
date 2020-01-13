@@ -36,29 +36,20 @@ public class RunAsAdmin {
                     bool = true;
                 }
             } else scanner.next();
-
         } while (!bool);
 
 
         switch (check) {
-
             case (1):
-
                 View.printBooks(library);
                 runAsAdmin(users, library, user);
-
                 break;
 
 //--------------------------------------------------------------------------------------------------------------
-
             case (2):
-
                 Book newBook = LibraryLogic.addNewBookToLibrary(library);
-
                 LibraryLogic.saveLibraryToTXT(newBook);
                 runAsAdmin(users, library, user);
-
-
                 break;
 //--------------------------------------------------------------------------------------------------------------
 
@@ -71,11 +62,8 @@ public class RunAsAdmin {
 
                 library = LibraryLogic.deleteBookFromLibrary(numberOfBook, library);
                 LibraryLogic.saveLibraryToTXTDelete(library);
-
-
                 View.printBooks(library);
                 runAsAdmin(users, library, user);
-
                 break;
 
 //--------------------------------------------------------------------------------------------------------------

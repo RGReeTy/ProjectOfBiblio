@@ -49,12 +49,4 @@ public class UserLogic {
         return user;
     }
 
-    public static User getUserWithEMail(User user, Users users) {
-        for (User userNew : users.getUsers()) {
-            if (userNew.getUserName().equals(user.getUserName()) && userNew.getUserPassword().equals(user.getUserPassword())) {
-                return userNew;
-            }
-        }
-        return null;
-    }
 }

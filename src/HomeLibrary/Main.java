@@ -41,12 +41,10 @@ public class Main {
             if (UserLogic.isCorrectUser(user, users)) {
                 if (UserLogic.isAdmin(user)) {
                     Print.printTheMessage("Wake up Neo");
-                    user = UserLogic.getUserWithEMail(user, users);
                     RunAsAdmin runAsAdmin = new RunAsAdmin();
                     runAsAdmin.runAsAdmin(users, library, user);
                     bool = true;
                 } else {
-                    user = UserLogic.getUserWithEMail(user, users);
                     RunAsUser runAsUser = new RunAsUser();
                     runAsUser.runAsUser(user, users, library);
                     bool = true;

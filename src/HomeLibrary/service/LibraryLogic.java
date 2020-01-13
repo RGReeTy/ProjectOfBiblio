@@ -5,6 +5,8 @@ import HomeLibrary.entity.library.Library;
 import HomeLibrary.view.Print;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,27 +26,32 @@ public class LibraryLogic {
         }
     }
 
-    public static Book findTheBook(String string, Library library) {
-        Pattern pattern = Pattern.compile(string.toLowerCase());
+    public static ArrayList<Book> findTheBook(String textToFind, Library library) {
+        Pattern pattern = Pattern.compile(textToFind.toLowerCase());
+        ArrayList<Book> findingBooks = new ArrayList<>();
 
         for (Book book : library.getBooks()) {
             Matcher matcher = pattern.matcher(book.toString().toLowerCase());
             if (matcher.find()) {
-                return book;
+                findingBooks.add(book);
             }
         }
-        return null;
+        if (findingBooks.size() == 0) {
+            return null;
+        } else {
+            return findingBooks;
+        }
     }
 
     public static Book addNewBookToLibrary(Library library) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Print.printTheMessage("Enter book's name..");
         String bookName = reader.readLine();
-         Print.printTheMessage("Enter author's name..");
+        Print.printTheMessage("Enter author's name..");
         String author = reader.readLine();
-         Print.printTheMessage("Enter type of book..");
+        Print.printTheMessage("Enter type of book..");
         String typeOfBook = reader.readLine();
-         Print.printTheMessage("What about this book..");
+        Print.printTheMessage("What about this book..");
         String info = reader.readLine();
 
         return new Book(bookName, author, typeOfBook, info);
@@ -58,8 +65,7 @@ public class LibraryLogic {
             writer.write(book.getBookName() + " + " + book.getAuthor() + " + " + book.getTypeOfBook() + " + " + book.getAboutBook() + "@");
             writer.flush();
         } catch (IOException ex) {
-
-             Print.printTheMessage(ex.getMessage());
+            Print.printTheMessage(ex.getMessage());
         }
     }
 
@@ -71,7 +77,7 @@ public class LibraryLogic {
             }
             writer.flush();
         } catch (IOException ex) {
-             Print.printTheMessage(ex.getMessage());
+            Print.printTheMessage(ex.getMessage());
         }
     }
 
@@ -79,10 +85,14 @@ public class LibraryLogic {
         Library newLibrary = new Library();
 
         for (int i = 0; i < library.getBooks().length; i++) {
-            if (i != numberOfBook) {
+            if (i + 1 != numberOfBook) {
                 newLibrary.addBook(library.getBooks(i));
             }
         }
         return newLibrary;
+    }
+
+    public static boolean isExist(Library library, int index) {
+        return index <= library.getBooks().length;
     }
 }

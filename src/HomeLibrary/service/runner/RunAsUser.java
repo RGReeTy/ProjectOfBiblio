@@ -1,16 +1,16 @@
 package HomeLibrary.service.runner;
 
+import HomeLibrary.entity.book.Book;
 import HomeLibrary.entity.library.Library;
 import HomeLibrary.service.LibraryLogic;
 import HomeLibrary.entity.user.User;
 import HomeLibrary.entity.user.Users;
 import HomeLibrary.view.Print;
-import HomeLibrary.view.View;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Objects;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class RunAsUser {
@@ -24,7 +24,10 @@ public class RunAsUser {
 
         boolean bool = false;
         do {
-            Print.printTheMessage("1 - Watch library, 2 - Find book in the library, 3 - Ask to add book to administartor, 4 - Quit");
+            Print.printTheMessage("1 - Watch library, " +
+                    "2 - Find book in the library, " +
+                    "3 - Ask to add book to administartor, " +
+                    "4 - Quit");
 
             if (scanner.hasNextInt()) {
 
@@ -35,15 +38,13 @@ public class RunAsUser {
                     bool = true;
                 }
             } else scanner.next();
-
         } while (!bool);
-
 
         switch (check) {
 
             case (1):
 
-                View.printBooks(library);
+                Print.printBooks(library);
                 runAsUser(user, users, library);
                 break;
 //--------------------------------------------------------------------------------------------------------------
@@ -51,12 +52,16 @@ public class RunAsUser {
             case (2):
 
                 Print.printTheMessage("What do you want to find?");
-                String stringFind = scanner.next();
-                if (LibraryLogic.findTheBook(stringFind, library) != null) {
-                    Print.printTheMessage(Objects.requireNonNull(LibraryLogic.findTheBook(stringFind, library)).toString());
+                String textToFind = scanner.next();
+                ArrayList<Book> findingBooks = LibraryLogic.findTheBook(textToFind, library);
+                if (findingBooks == null) {
+                    Print.printTheMessage("Sorry, can't find any match like " + textToFind);
                 } else {
-                    Print.printTheMessage("Sorry, can't find any match like " + stringFind);
+                    Print.printTheMessage("Find next book(s):");
+                    Print.printTheElementsOfArrayListOfBooks(findingBooks);
+
                 }
+
                 runAsUser(user, users, library);
 
                 break;

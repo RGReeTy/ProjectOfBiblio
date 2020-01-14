@@ -62,7 +62,17 @@ public class RunAsAdmin {
                 break;
 //--------------------------------------------------------------------------------------------------------------
             case (3):
-                Book newBook = LibraryLogic.addNewBookToLibrary(library);
+                Book newBook;
+                if (LibraryLogic.isOfferingBookContainsAnyOffer()) {
+                    Print.printTheMessage("Do you want to watch and to add book from user's offer? (Y/N)");
+                    newBook = LibraryLogic.showBookFromUsersOffer();
+                    Print.printTheMessage(newBook.toString());
+                    if (scanner.next().equalsIgnoreCase("Y")) {
+                        library.addBook(newBook);
+                    }
+                } else {
+                    newBook = LibraryLogic.addNewBookToLibrary(library);
+                }
                 LibraryLogic.saveLibraryToTXT(newBook);
                 runAsAdmin(users, library, user);
                 break;

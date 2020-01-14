@@ -6,7 +6,6 @@ import HomeLibrary.view.Print;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -69,6 +68,17 @@ public class LibraryLogic {
         }
     }
 
+    public static void saveOfferingBookToTXT(Book book) {
+        try (FileWriter writer = new FileWriter("src\\HomeLibrary\\file\\OfferingBook.txt", true)) {
+
+            writer.append(System.lineSeparator());
+            writer.write(book.getBookName() + " + " + book.getAuthor() + " + " + book.getTypeOfBook() + " + " + book.getAboutBook() + "@");
+            writer.flush();
+        } catch (IOException ex) {
+            Print.printTheMessage(ex.getMessage());
+        }
+    }
+
     public static void saveLibraryToTXTDelete(Library library) {
         try (FileWriter writer = new FileWriter("src\\HomeLibrary\\file\\Library.txt", false)) {
             for (Book book : library.getBooks()) {
@@ -94,5 +104,23 @@ public class LibraryLogic {
 
     public static boolean isExist(Library library, int index) {
         return index <= library.getBooks().length;
+    }
+
+    public static boolean isOfferingBookContainsAnyOffer() throws FileNotFoundException {
+
+        Scanner scanner = new Scanner(new File("src\\HomeLibrary\\file\\OfferingBook.txt"), "UTF-8");
+        return scanner.hasNextLine();
+    }
+
+    public static Book showBookFromUsersOffer() throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File("src\\HomeLibrary\\file\\OfferingBook.txt"), "UTF-8");
+        String BooksInString = scanner.useDelimiter("\\A").next(); // \\A - The beginning of the input(docs.oracle.com)
+        Pattern pattern = Pattern.compile("([а-яА-яA-Za-z0-9 .,?!\"]+)\\+([а-яА-яA-Za-z0-9 .,?!\"]+)\\+([а-яА-яA-Za-z0-9 .,?!\"]+)\\+(.+)@");
+        Matcher matcher = pattern.matcher(BooksInString);
+        Book newBook = null;
+        while (matcher.find()) {
+            newBook = new Book(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4));
+        }
+        return newBook;
     }
 }

@@ -1,4 +1,4 @@
-package HomeLibrary;
+package version_5;
 
 //Задание 1: создать консольное приложение “Учет книг в домашней библиотеке”.
 //
@@ -14,15 +14,14 @@ package HomeLibrary;
 //        • Данные аутентификации пользователей хранятся в текстовом файле. Пароль не хранится в открытом виде
 //
 //        По умолчанию логин администратора: admin пароль: 0000
-//      TODO переделать с добавлением паттерна команда, добавить интерфейсы
 
 import HomeLibrary.entity.library.Library;
+import HomeLibrary.entity.user.User;
+import HomeLibrary.entity.user.Users;
 import HomeLibrary.service.LibraryLogic;
+import HomeLibrary.service.UserLogic;
 import HomeLibrary.service.runner.RunAsAdmin;
 import HomeLibrary.service.runner.RunAsUser;
-import HomeLibrary.entity.user.User;
-import HomeLibrary.service.UserLogic;
-import HomeLibrary.entity.user.Users;
 import HomeLibrary.view.Print;
 
 import java.io.IOException;

@@ -53,6 +53,7 @@ public class Main {
             } else {
                 Print.printTheMessage("This user does not exist!");
             }
+
         } while (!bool);
     }
 }

@@ -1,7 +1,7 @@
 package by.javatr.library.controller.command;
 
 public enum CommandName {
-    SIGH_IN,
+    SIGN_IN,
     REGISTRATION,
     ADD_BOOK,
     WRONG_REQUEST

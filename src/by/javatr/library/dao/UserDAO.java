@@ -5,7 +5,9 @@ import by.javatr.library.dao.exception.DAOException;
 
 public interface UserDAO {
 
-    void signIn(String login, String password) throws DAOException;
+    boolean signIn(String login, String password) throws DAOException;
 
-    void registration(User user) throws DAOException;
+    boolean registration(User user) throws DAOException;
+
+
 }

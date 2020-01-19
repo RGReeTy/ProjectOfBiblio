@@ -7,6 +7,6 @@ public class Runner {
     public static void main(String[] args) {
         Controller controller = new Controller();
 
-        controller.executeTask("SIGN_IN ");
+        System.out.println(controller.executeTask("SIGN_IN "));
     }
 }

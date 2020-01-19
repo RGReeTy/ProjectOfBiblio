@@ -18,7 +18,7 @@ public class UserDAOImpl implements UserDAO, FileDAO {
 
     {
         try {
-            users = loadDataFromFile("src\\by\\javatr\\library\\resource\\user.txt");
+            users = loadDataFromFile("src\\by\\javatr\\library\\resource\\user\\users.txt");
         } catch (DAOException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {

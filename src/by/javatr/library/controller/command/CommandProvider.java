@@ -1,11 +1,6 @@
 package by.javatr.library.controller.command;
 
-import by.javatr.library.controller.command.Command;
-import by.javatr.library.controller.command.CommandName;
-import by.javatr.library.controller.command.impl.AddBook;
-import by.javatr.library.controller.command.impl.Register;
-import by.javatr.library.controller.command.impl.SignIn;
-import by.javatr.library.controller.command.impl.WrongRequest;
+import by.javatr.library.controller.command.impl.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,10 +8,14 @@ import java.util.Map;
 public final class CommandProvider {
     private final Map<CommandName, Command> repository = new HashMap<>();
 
+
     public CommandProvider() {
         repository.put(CommandName.SIGN_IN, new SignIn());
         repository.put(CommandName.REGISTRATION, new Register());
+        repository.put(CommandName.SHOW, new Show());
+        repository.put(CommandName.FIND, new Find());
         repository.put(CommandName.ADD_BOOK, new AddBook());
+        repository.put(CommandName.DELETE_BOOK, new DeleteBook());
         repository.put(CommandName.WRONG_REQUEST, new WrongRequest());
     }
 

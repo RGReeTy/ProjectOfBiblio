@@ -7,6 +7,11 @@ public class Runner {
     public static void main(String[] args) {
         Controller controller = new Controller();
 
-        System.out.println(controller.executeTask("SIGN_IN "));
+        String access = controller.executeTask("SIGN_IN ");
+        System.out.println(access);
+        if (access.equals("Welcome")){
+            System.out.println("Success");
+        }
+
     }
 }

@@ -24,9 +24,7 @@ public class SignIn implements Command {
         ClientService clientService = null;
         try {
             clientService = serviceFactory.getClientService();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (DAOException e) {
+        } catch (FileNotFoundException | DAOException e) {
             e.printStackTrace();
         }
 
@@ -36,16 +34,16 @@ public class SignIn implements Command {
             System.out.println("Enter password");
             password = scanner.next();
 
-            if (clientService.signIn(login, password)) {
-                response = "Welcome";
-                System.out.println(login + "  " + password);
-            } else {
-                response = "This user does not exist!";
+            if (clientService != null) {
+                if (clientService.signIn(login, password)) {
+                    response = "Welcome";
+                } else {
+                    response = "Wrong login or password!";
+                }
             }
         } catch (ServiceException e) {
             response = "Error during login procedure";
         }
-
         return response;
     }
 }

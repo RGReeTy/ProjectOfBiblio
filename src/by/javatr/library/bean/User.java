@@ -7,13 +7,15 @@ public class User implements Serializable {
 
     private String userName;
     private String userPassword;
+    private boolean isAdmin = false;
 
     public User() {
     }
 
-    public User(String userName, String userPassword) {
+    public User(String userName, String userPassword, boolean isAdmin) {
         this.userName = userName;
         this.userPassword = userPassword;
+        this.isAdmin = isAdmin;
     }
 
     public String getUserName() {
@@ -32,25 +34,35 @@ public class User implements Serializable {
         this.userPassword = userPassword;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(userName, user.userName) &&
+        return isAdmin == user.isAdmin &&
+                Objects.equals(userName, user.userName) &&
                 Objects.equals(userPassword, user.userPassword);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName, userPassword);
+        return Objects.hash(userName, userPassword, isAdmin);
     }
 
     @Override
     public String toString() {
-        return getClass() +
+        return "User {" +
                 "userName='" + userName + '\'' +
                 ", userPassword='" + userPassword + '\'' +
+                ", isAdmin=" + isAdmin +
                 '}';
     }
 }

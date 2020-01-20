@@ -13,7 +13,8 @@ public final class Controller {
         String commandName;
         Command executionCommand;
 
-        commandName = request.substring(0, request.indexOf(paramDelimeter));
+        commandName = request.trim();
+        //commandName = request.substring(0, request.indexOf(paramDelimeter));
         executionCommand = provider.getCommand(commandName);
 
         String response;

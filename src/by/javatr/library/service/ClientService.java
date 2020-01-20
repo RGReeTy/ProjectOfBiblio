@@ -1,19 +1,24 @@
 package by.javatr.library.service;
 
+import by.javatr.library.bean.Book;
 import by.javatr.library.bean.User;
+import by.javatr.library.dao.daoimpl.BookDAOImpl;
 import by.javatr.library.dao.daoimpl.UserDAOImpl;
 import by.javatr.library.dao.exception.DAOException;
 import by.javatr.library.service.exception.ServiceException;
 
 import java.io.FileNotFoundException;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class ClientService {
     UserDAOImpl userDAO = new UserDAOImpl();
-    private User[] users;
+    BookDAOImpl bookDAO = new BookDAOImpl();
+    private User currentUser;
+    private ArrayList<Book> books;
 
     public ClientService() throws FileNotFoundException, DAOException {
-        users = userDAO.getUsers();
+        currentUser = userDAO.getCurrentUser();
+        //boooks here
     }
 
     public boolean signIn(String login, String password) throws ServiceException {
@@ -25,13 +30,8 @@ public class ClientService {
         return false;
     }
 
-    public void addUser(User user) {
-        users = Arrays.copyOf(users, users.length + 1);
-        users[users.length - 1] = user;
-    }
-
-    public User[] getUsers() {
-        return users;
+    public ArrayList<Book> returnCollectionOfBooks() {
+        return books = bookDAO.getAllBooks();
     }
 
 }

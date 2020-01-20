@@ -10,9 +10,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class SignIn implements Command {
-    //    static{
-//        System.out.println("SIGN_IN");
-//    }
     @Override
     public String execute(String request) {
         String login = null;

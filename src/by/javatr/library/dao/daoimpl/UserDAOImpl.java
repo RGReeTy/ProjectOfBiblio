@@ -7,58 +7,70 @@ import by.javatr.library.dao.exception.DAOException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public class UserDAOImpl implements UserDAO, FileDAO {
-    User[] users = null;
+    private static final Map<Integer, User> clientList = new HashMap<Integer, User>();
+    private static int id = 0;
+    private User currentUser = null;
 
     {
         try {
-            users = loadDataFromFile("src\\by\\javatr\\library\\resource\\user\\users.txt");
-        } catch (DAOException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
+            loadDataFromFile("src\\by\\javatr\\library\\resource\\user\\users.txt");
+        } catch (DAOException | FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public boolean signIn(String login, String password) throws DAOException {
-        for (User user : users) {
-            if (user.getUserName().equalsIgnoreCase(login) & user.getUserPassword().equalsIgnoreCase(password))
-                return true;
+        for (Map.Entry<Integer, User> entry : clientList.entrySet()) {
+            if (entry.getValue().getUserName().equalsIgnoreCase(login) & entry.getValue().getUserPassword().equalsIgnoreCase(password))
+                currentUser = entry.getValue();
+            return true;
         }
         return false;
     }
 
     @Override
-    public User[] loadDataFromFile(String address) throws DAOException, FileNotFoundException {
-
-        User[] users = new User[0];
+    public void loadDataFromFile(String address) throws DAOException, FileNotFoundException {
 
         Scanner scanner = new Scanner(new File(address), "UTF-8");
         String usersInString = scanner.useDelimiter("\\A").next();
 
-        Pattern pattern = Pattern.compile("([а-яА-яA-Za-z0-9]+)\\s([а-яА-яA-Za-z0-9]+)");
+        Pattern pattern = Pattern.compile("([а-яА-яA-Za-z0-9]+)\\s([а-яА-яA-Za-z0-9]+)\\s(true|false)");
         Matcher matcher = pattern.matcher(usersInString);
 
         while (matcher.find()) {
-            users = Arrays.copyOf(users, users.length + 1);
-            users[users.length - 1] = new User(matcher.group(1), matcher.group(2));
+            clientList.put(++id, new User(matcher.group(1), matcher.group(2), Boolean.parseBoolean(matcher.group(3))));
         }
-        return users;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void addUser(String login, String password) {
+        clientList.put(++id, new User(login, password, false));
+        try (FileWriter writer = new FileWriter("src\\by\\javatr\\library\\resource\\user\\users.txt", true)) {
+            writer.append(System.lineSeparator());
+            writer.write(login + " " + password + " " + "false");
+            writer.flush();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public boolean registration(User user) throws DAOException {
+        //вставить валидацию, если юзер уже существует - вернуть false, нет - зарегистрировать + true
         return false;
-    }
-
-    public User[] getUsers() {
-        return users;
     }
 }

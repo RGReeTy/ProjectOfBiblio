@@ -4,7 +4,6 @@ import by.javatr.library.bean.Book;
 import by.javatr.library.controller.command.Command;
 import by.javatr.library.dao.exception.DAOException;
 import by.javatr.library.service.ClientService;
-import by.javatr.library.service.exception.ServiceException;
 import by.javatr.library.service.factory.ServiceFactory;
 
 import java.io.FileNotFoundException;

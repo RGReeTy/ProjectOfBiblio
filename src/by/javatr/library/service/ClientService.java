@@ -8,6 +8,7 @@ import by.javatr.library.dao.exception.DAOException;
 import by.javatr.library.service.exception.ServiceException;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ClientService {
@@ -18,7 +19,6 @@ public class ClientService {
 
     public ClientService() throws FileNotFoundException, DAOException {
         currentUser = userDAO.getCurrentUser();
-        //boooks here
     }
 
     public boolean signIn(String login, String password) throws ServiceException {
@@ -34,4 +34,7 @@ public class ClientService {
         return books = bookDAO.getAllBooks();
     }
 
+    public void addNewBook() throws IOException, DAOException {
+        bookDAO.addNewBookToLibrary();
+    }
 }

@@ -27,8 +27,8 @@ public final class CommandProvider {
             commandName = CommandName.valueOf(name.toUpperCase());
             command = repository.get(commandName);
         } catch (IllegalArgumentException | NullPointerException e) {
-            e.printStackTrace();
             command = repository.get(CommandName.WRONG_REQUEST);
+            e.printStackTrace();
         }
         return command;
     }

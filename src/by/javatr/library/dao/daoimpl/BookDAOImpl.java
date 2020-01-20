@@ -5,10 +5,8 @@ import by.javatr.library.dao.BookDAO;
 import by.javatr.library.dao.FileDAO;
 import by.javatr.library.dao.exception.DAOException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,6 +32,21 @@ public class BookDAOImpl implements BookDAO, FileDAO {
     @Override
     public void addBook(Book book) throws DAOException {
         books.add(book);
+    }
+
+    public void addNewBookToLibrary() throws IOException, DAOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter book's name..");
+        String bookName = reader.readLine();
+        System.out.println("Enter author's name..");
+        String author = reader.readLine();
+        System.out.println("Enter type of book..");
+        String typeOfBook = reader.readLine();
+        System.out.println("What about this book..");
+        String info = reader.readLine();
+
+        addBook(new Book(bookName, author, typeOfBook, info));
+
     }
 
     @Override

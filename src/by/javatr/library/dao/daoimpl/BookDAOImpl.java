@@ -46,12 +46,17 @@ public class BookDAOImpl implements BookDAO, FileDAO {
         String info = reader.readLine();
 
         addBook(new Book(bookName, author, typeOfBook, info));
-
+        saveLibraryToTXT();
     }
 
     @Override
-    public void deleteBook(int idBook) throws DAOException {
-        books.remove(books.get(idBook));
+    public void deleteBook() throws DAOException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choose number of book for deleting:");
+        int bookIDForDeleting = scanner.nextInt();
+        if (bookIDForDeleting <= books.size() & bookIDForDeleting > 0)
+            books.remove(bookIDForDeleting - 1);
+        saveLibraryToTXT();
     }
 
     @Override
@@ -91,6 +96,18 @@ public class BookDAOImpl implements BookDAO, FileDAO {
             return null;
         } else {
             return findingBooks;
+        }
+    }
+
+    public void saveLibraryToTXT() {
+        try (FileWriter writer = new FileWriter("src\\by\\javatr\\library\\resource\\library\\Library.txt", false)) {
+            for (Book book : books) {
+                writer.append(System.lineSeparator());
+                writer.write(book.getBookName() + " + " + book.getAuthor() + " + " + book.getTypeOfBook() + " + " + book.getAboutBook() + "@");
+            }
+            writer.flush();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

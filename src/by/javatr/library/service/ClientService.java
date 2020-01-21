@@ -41,4 +41,12 @@ public class ClientService {
     public ArrayList<Book> findTheBook() {
         return bookDAO.findTheBook();
     }
+
+    public void deleteBook(){
+        try {
+            bookDAO.deleteBook();
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+    }
 }

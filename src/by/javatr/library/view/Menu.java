@@ -7,8 +7,11 @@ import java.util.Scanner;
 public class Menu {
     Controller controller = new Controller();
     Scanner scanner = new Scanner(System.in);
+    String response;
+    String request;
     final String WELCOME_TEXT = "Welcome to the library!";
     final String OPTIONS_USER = "You can choose next commands:\n[SHOW]\t[FIND]\t[ADD_BOOK]\t[DELETE_BOOK]\t[QUIT]";
+    final String BUE_TEXT = "Have a nice day!";
 
     public void run() {
         String access;
@@ -17,13 +20,21 @@ public class Menu {
         if (access.equals("Welcome")) {
             workWithLibrary();
         } else {
-
+            System.out.println("Access denied!");
         }
     }
 
     public void workWithLibrary() {
         System.out.println(OPTIONS_USER);
-        System.out.println(controller.executeTask(scanner.nextLine()));
-        workWithLibrary();
+
+        request = scanner.nextLine();
+
+        if (request.equalsIgnoreCase("QUIT")) {
+            System.out.println(BUE_TEXT);
+        } else {
+            response = controller.executeTask(request);
+            System.out.println(response);
+            workWithLibrary();
+        }
     }
 }

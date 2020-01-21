@@ -66,4 +66,31 @@ public class BookDAOImpl implements BookDAO, FileDAO {
             addBook(new Book(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4)));
         }
     }
+
+    public ArrayList<Book> findTheBook() {
+        String textToFind = null;
+        ArrayList<Book> findingBooks = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("Enter what you want to find..");
+        try {
+            textToFind = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Pattern pattern = Pattern.compile(textToFind.toLowerCase());
+
+        for (Book book : books) {
+            Matcher matcher = pattern.matcher(book.toString().toLowerCase());
+            if (matcher.find()) {
+                findingBooks.add(book);
+            }
+        }
+        if (findingBooks.size() == 0) {
+            return null;
+        } else {
+            return findingBooks;
+        }
+    }
 }

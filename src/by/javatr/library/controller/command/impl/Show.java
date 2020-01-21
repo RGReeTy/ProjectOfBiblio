@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 public class Show implements Command {
     @Override
     public String execute(String request) {
-        String response = null;
+        String response = "";
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ClientService clientService = null;
@@ -23,7 +23,7 @@ public class Show implements Command {
 
         if (clientService != null) {
             for (Book book : clientService.returnCollectionOfBooks()) {
-                System.out.println(book);
+
                 response += book.toString() + "\n";
             }
         } else response = "Error during load book's library procedure";

@@ -37,4 +37,8 @@ public class ClientService {
     public void addNewBook() throws IOException, DAOException {
         bookDAO.addNewBookToLibrary();
     }
+
+    public ArrayList<Book> findTheBook() {
+        return bookDAO.findTheBook();
+    }
 }

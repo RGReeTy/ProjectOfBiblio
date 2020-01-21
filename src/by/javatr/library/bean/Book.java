@@ -8,6 +8,9 @@ public class Book implements Serializable {
     private String author;
     private String typeOfBook;
     private String aboutBook;
+    private static int genID = 0;
+    private int id = 0;
+
 
     public Book() {
     }
@@ -17,6 +20,7 @@ public class Book implements Serializable {
         this.author = author;
         this.typeOfBook = typeOfBook;
         this.aboutBook = aboutBook;
+        this.id = ++genID;
     }
 
     public String getBookName() {
@@ -69,7 +73,7 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "Book - " + bookName +
+        return id + "\t" + bookName +
                 ",\tAuthor - " + author +
                 ",\tType of book - " + typeOfBook +
                 ",\tAbout - " + aboutBook;

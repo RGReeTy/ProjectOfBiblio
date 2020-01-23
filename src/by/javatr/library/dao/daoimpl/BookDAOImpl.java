@@ -13,6 +13,8 @@ import java.util.regex.Pattern;
 
 public class BookDAOImpl implements BookDAO, FileDAO {
 
+    //сделать тут только возврат коллекции
+
     private ArrayList<Book> books;
 
     public BookDAOImpl() {

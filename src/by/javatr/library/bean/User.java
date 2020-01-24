@@ -7,7 +7,7 @@ public class User implements Serializable {
 
     private String userName;
     private String userPassword;
-    private boolean isAdmin = false;
+    private boolean isAdmin;
 
     public User() {
     }

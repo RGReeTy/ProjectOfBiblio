@@ -13,8 +13,6 @@ import java.util.regex.Pattern;
 
 public class BookDAOImpl implements BookDAO, FileDAO {
 
-    //сделать тут только возврат коллекции
-
     private ArrayList<Book> books;
 
     public BookDAOImpl() {
@@ -34,21 +32,6 @@ public class BookDAOImpl implements BookDAO, FileDAO {
     @Override
     public void addBook(Book book) throws DAOException {
         books.add(book);
-    }
-
-    public void addNewBookToLibrary() throws IOException, DAOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter book's name..");
-        String bookName = reader.readLine();
-        System.out.println("Enter author's name..");
-        String author = reader.readLine();
-        System.out.println("Enter type of book..");
-        String typeOfBook = reader.readLine();
-        System.out.println("What about this book..");
-        String info = reader.readLine();
-
-        addBook(new Book(bookName, author, typeOfBook, info));
-        saveLibraryToTXT();
     }
 
     @Override
@@ -71,33 +54,6 @@ public class BookDAOImpl implements BookDAO, FileDAO {
 
         while (matcher.find()) {
             addBook(new Book(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4)));
-        }
-    }
-
-    public ArrayList<Book> findTheBook() {
-        String textToFind = null;
-        ArrayList<Book> findingBooks = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Enter what you want to find..");
-        try {
-            textToFind = reader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Pattern pattern = Pattern.compile(textToFind.toLowerCase());
-
-        for (Book book : books) {
-            Matcher matcher = pattern.matcher(book.toString().toLowerCase());
-            if (matcher.find()) {
-                findingBooks.add(book);
-            }
-        }
-        if (findingBooks.size() == 0) {
-            return null;
-        } else {
-            return findingBooks;
         }
     }
 

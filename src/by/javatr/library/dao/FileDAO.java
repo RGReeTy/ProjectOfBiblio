@@ -8,5 +8,4 @@ public interface FileDAO {
 
     void loadDataFromFile(String address) throws DAOException, FileNotFoundException;
 
-
 }

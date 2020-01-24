@@ -17,10 +17,6 @@ import java.util.regex.Pattern;
 
 
 public class UserDAOImpl implements UserDAO, FileDAO {
-    private static final Map<Integer, User> clientList = new HashMap<Integer, User>();
-    private static int id = 0;
-    private User currentUser = null;
-
     {
         try {
             loadDataFromFile("src\\by\\javatr\\library\\resource\\user\\users.txt");
@@ -29,12 +25,19 @@ public class UserDAOImpl implements UserDAO, FileDAO {
         }
     }
 
+    private static final Map<Integer, User> clientList = new HashMap<Integer, User>();
+    private static int id = 0;
+    private User currentUser = new User();
+
     @Override
     public boolean signIn(String login, String password) throws DAOException {
         for (Map.Entry<Integer, User> entry : clientList.entrySet()) {
-            if (entry.getValue().getUserName().equalsIgnoreCase(login) & entry.getValue().getUserPassword().equalsIgnoreCase(password))
-                currentUser = entry.getValue();
-            return true;
+            if (entry.getValue().getUserName().equalsIgnoreCase(login) & entry.getValue().getUserPassword().equalsIgnoreCase(password)) {
+                currentUser.setUserName(entry.getValue().getUserName());
+                currentUser.setUserPassword(entry.getValue().getUserPassword());
+                currentUser.setAdmin(entry.getValue().isAdmin());
+                return true;
+            }
         }
         return false;
     }

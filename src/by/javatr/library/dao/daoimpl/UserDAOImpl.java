@@ -15,6 +15,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static by.javatr.library.service.validation.Validation.checkTheUserOnAuth;
+
 
 public class UserDAOImpl implements UserDAO, FileDAO {
     {
@@ -32,7 +34,7 @@ public class UserDAOImpl implements UserDAO, FileDAO {
     @Override
     public boolean signIn(String login, String password) throws DAOException {
         for (Map.Entry<Integer, User> entry : clientList.entrySet()) {
-            if (entry.getValue().getUserName().equalsIgnoreCase(login) & entry.getValue().getUserPassword().equalsIgnoreCase(password)) {
+            if (checkTheUserOnAuth(login, password, entry.getValue())) {
                 currentUser.setUserName(entry.getValue().getUserName());
                 currentUser.setUserPassword(entry.getValue().getUserPassword());
                 currentUser.setAdmin(entry.getValue().isAdmin());

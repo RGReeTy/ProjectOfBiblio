@@ -7,7 +7,6 @@ import by.javatr.library.dao.exception.DAOException;
 import by.javatr.library.service.exception.ServiceException;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -16,26 +15,34 @@ import java.util.regex.Pattern;
 
 public class ClientService {
     UserDAOImpl userDAO = new UserDAOImpl();
-    BookDAOImpl bookDAO = new BookDAOImpl();
+    BookDAOImpl bookDAO;
+
+    {
+        try {
+            bookDAO = new BookDAOImpl();
+        } catch (DAOException e) {
+            throw new ServiceException("Error at logic layer!", e);
+        }
+    }
+
     private ArrayList<Book> books;
 
-    public ClientService() throws FileNotFoundException, DAOException {
+    public ClientService() throws ServiceException {
     }
 
     public boolean signIn(String login, String password) throws ServiceException {
         try {
             return userDAO.signIn(login, password);
         } catch (DAOException e) {
-            e.printStackTrace();
+            throw new ServiceException("Error during sign in procedure!", e);
         }
-        return false;
     }
 
     public ArrayList<Book> returnCollectionOfBooks() {
         return books = bookDAO.getAllBooks();
     }
 
-    public void addNewBook() throws IOException, DAOException {
+    public void addNewBook() throws IOException, ServiceException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter book's name..");
         String bookName = reader.readLine();
@@ -47,10 +54,14 @@ public class ClientService {
         String info = reader.readLine();
 
         bookDAO.addBook(new Book(bookName, author, typeOfBook, info));
-        bookDAO.saveLibraryToTXT();
+        try {
+            bookDAO.saveLibraryToTXT();
+        } catch (DAOException e) {
+            throw new ServiceException("Error during saving procedure", e);
+        }
     }
 
-    public ArrayList<Book> findTheBook() {
+    public ArrayList<Book> findTheBook() throws ServiceException {
         String textToFind = null;
         ArrayList<Book> findingBooks = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -59,7 +70,7 @@ public class ClientService {
         try {
             textToFind = reader.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ServiceException("Error during finding procedure", e);
         }
 
         Pattern pattern = Pattern.compile(textToFind.toLowerCase());
@@ -77,12 +88,12 @@ public class ClientService {
         }
     }
 
-    public void deleteBook() {
+    public void deleteBook() throws ServiceException {
         if (userDAO.getCurrentUser().isAdmin()) {
             try {
                 bookDAO.deleteBook();
             } catch (DAOException e) {
-                e.printStackTrace();
+                throw new ServiceException("Error during deleting procedure", e);
             }
         } else {
             System.out.println("\nOnly administrator can delete books!");

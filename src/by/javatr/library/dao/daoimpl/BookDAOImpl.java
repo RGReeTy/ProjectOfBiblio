@@ -15,13 +15,9 @@ public class BookDAOImpl implements BookDAO, FileDAO {
 
     private ArrayList<Book> books;
 
-    public BookDAOImpl() {
+    public BookDAOImpl() throws DAOException {
         books = new ArrayList<>();
-        try {
-            loadDataFromFile("src\\by\\javatr\\library\\resource\\library\\Library.txt");
-        } catch (DAOException | FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        loadDataFromFile("src\\by\\javatr\\library\\resource\\library\\Library.txt");
     }
 
     @Override
@@ -30,14 +26,14 @@ public class BookDAOImpl implements BookDAO, FileDAO {
     }
 
     @Override
-    public void addBook(Book book) throws DAOException {
+    public void addBook(Book book) {
         books.add(book);
     }
 
     @Override
     public void deleteBook() throws DAOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose number of book for deleting:");
+        System.out.println("Choose book's number for deleting:");
         int bookIDForDeleting = scanner.nextInt();
         if (bookIDForDeleting <= books.size() & bookIDForDeleting > 0)
             books.remove(bookIDForDeleting - 1);
@@ -45,8 +41,13 @@ public class BookDAOImpl implements BookDAO, FileDAO {
     }
 
     @Override
-    public void loadDataFromFile(String address) throws DAOException, FileNotFoundException {
-        Scanner scanner = new Scanner(new File(address), "UTF-8");
+    public void loadDataFromFile(String address) throws DAOException {
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new File(address), "UTF-8");
+        } catch (FileNotFoundException e) {
+            throw new DAOException("Error at loading Library", e);
+        }
         String BooksInString = scanner.useDelimiter("\\A").next(); // \\A - The beginning of the input(docs.oracle.com)
 
         Pattern pattern = Pattern.compile("([а-яА-яA-Za-z0-9 .,?!\"]+)\\+([а-яА-яA-Za-z0-9 .,?!\"]+)\\+([а-яА-яA-Za-z0-9 .,?!\"]+)\\+(.+)@");
@@ -57,7 +58,7 @@ public class BookDAOImpl implements BookDAO, FileDAO {
         }
     }
 
-    public void saveLibraryToTXT() {
+    public void saveLibraryToTXT() throws DAOException {
         try (FileWriter writer = new FileWriter("src\\by\\javatr\\library\\resource\\library\\Library.txt", false)) {
             for (Book book : books) {
                 writer.append(System.lineSeparator());
@@ -65,7 +66,7 @@ public class BookDAOImpl implements BookDAO, FileDAO {
             }
             writer.flush();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            throw new DAOException("Error at saving Library", ex);
         }
     }
 }

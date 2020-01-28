@@ -4,6 +4,7 @@ import by.javatr.library.bean.Book;
 import by.javatr.library.controller.command.Command;
 import by.javatr.library.dao.exception.DAOException;
 import by.javatr.library.service.ClientService;
+import by.javatr.library.service.exception.ServiceException;
 import by.javatr.library.service.factory.ServiceFactory;
 
 import java.io.FileNotFoundException;
@@ -15,14 +16,14 @@ public class DeleteBook implements Command {
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ClientService clientService = null;
-        try {
-            clientService = serviceFactory.getClientService();
-        } catch (FileNotFoundException | DAOException e) {
-            e.printStackTrace();
-        }
+        clientService = serviceFactory.getClientService();
 
         if (clientService != null) {
-            clientService.deleteBook();
+            try {
+                clientService.deleteBook();
+            } catch (ServiceException e) {
+                System.out.println("Sorry, we caught an error, try again later..");
+            }
             for (Book book : clientService.returnCollectionOfBooks()) {
                 System.out.println(book);
                 response += book.toString() + "\n";

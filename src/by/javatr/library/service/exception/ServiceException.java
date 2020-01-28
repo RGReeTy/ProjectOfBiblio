@@ -10,7 +10,7 @@ public class ServiceException extends Exception {
         super(message);
     }
 
-    public ServiceException(Throwable e) {
-        e.printStackTrace();
+    public ServiceException(String message, Exception e) {
+        super(message, e);
     }
 }

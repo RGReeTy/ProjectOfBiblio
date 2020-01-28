@@ -22,8 +22,12 @@ public class UserDAOImpl implements UserDAO, FileDAO {
     {
         try {
             loadDataFromFile("src\\by\\javatr\\library\\resource\\user\\users.txt");
-        } catch (DAOException | FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException ex) {
+            try {
+                throw new DAOException("Error at loading User's list.", ex);
+            } catch (DAOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -33,21 +37,30 @@ public class UserDAOImpl implements UserDAO, FileDAO {
 
     @Override
     public boolean signIn(String login, String password) throws DAOException {
-        for (Map.Entry<Integer, User> entry : clientList.entrySet()) {
-            if (checkTheUserOnAuth(login, password, entry.getValue())) {
-                currentUser.setUserName(entry.getValue().getUserName());
-                currentUser.setUserPassword(entry.getValue().getUserPassword());
-                currentUser.setAdmin(entry.getValue().isAdmin());
-                return true;
+        if (clientList != null) {
+            for (Map.Entry<Integer, User> entry : clientList.entrySet()) {
+                if (checkTheUserOnAuth(login, password, entry.getValue())) {
+                    currentUser.setUserName(entry.getValue().getUserName());
+                    currentUser.setUserPassword(entry.getValue().getUserPassword());
+                    currentUser.setAdmin(entry.getValue().isAdmin());
+                    return true;
+                }
             }
+        } else {
+            throw new DAOException("Client list equals 0!");
         }
         return false;
     }
 
     @Override
-    public void loadDataFromFile(String address) throws DAOException, FileNotFoundException {
+    public void loadDataFromFile(String address) throws FileNotFoundException {
 
-        Scanner scanner = new Scanner(new File(address), "UTF-8");
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new File(address), "UTF-8");
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException();
+        }
         String usersInString = scanner.useDelimiter("\\A").next();
 
         Pattern pattern = Pattern.compile("([а-яА-яA-Za-z0-9]+)\\s([а-яА-яA-Za-z0-9]+)\\s(true|false)");
@@ -62,14 +75,14 @@ public class UserDAOImpl implements UserDAO, FileDAO {
         return currentUser;
     }
 
-    public void addUser(String login, String password) {
+    public void addUser(String login, String password) throws DAOException {
         clientList.put(++id, new User(login, password, false));
         try (FileWriter writer = new FileWriter("src\\by\\javatr\\library\\resource\\user\\users.txt", true)) {
             writer.append(System.lineSeparator());
             writer.write(login + " " + password + " " + "false");
             writer.flush();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            throw new DAOException("Error at loading User's list.", ex);
         }
     }
 

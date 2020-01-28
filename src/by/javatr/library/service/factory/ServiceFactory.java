@@ -2,6 +2,7 @@ package by.javatr.library.service.factory;
 
 import by.javatr.library.dao.exception.DAOException;
 import by.javatr.library.service.ClientService;
+import by.javatr.library.service.exception.ServiceException;
 
 import java.io.FileNotFoundException;
 
@@ -24,13 +25,17 @@ public class ServiceFactory {
         return localInstance;
     }
 
-    public ClientService getClientService() throws FileNotFoundException, DAOException {
+    public ClientService getClientService() {
         ClientService localClientService = instanceClientService;
         if (localClientService == null) {
             synchronized (ServiceFactory.class) {
                 localClientService = instanceClientService;
                 if (localClientService == null) {
-                    instanceClientService = localClientService = new ClientService();
+                    try {
+                        instanceClientService = localClientService = new ClientService();
+                    } catch (ServiceException e) {
+                        System.out.println("Sorry, we caught an error, try again later..");
+                    }
                 }
             }
         }

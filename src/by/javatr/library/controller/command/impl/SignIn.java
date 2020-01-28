@@ -1,12 +1,10 @@
 package by.javatr.library.controller.command.impl;
 
 import by.javatr.library.controller.command.Command;
-import by.javatr.library.dao.exception.DAOException;
 import by.javatr.library.service.ClientService;
 import by.javatr.library.service.exception.ServiceException;
 import by.javatr.library.service.factory.ServiceFactory;
 
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class SignIn implements Command {
@@ -19,11 +17,7 @@ public class SignIn implements Command {
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ClientService clientService = null;
-        try {
-            clientService = serviceFactory.getClientService();
-        } catch (FileNotFoundException | DAOException e) {
-            e.printStackTrace();
-        }
+        clientService = serviceFactory.getClientService();
 
         try {
             System.out.println("Enter login");

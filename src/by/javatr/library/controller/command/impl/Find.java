@@ -2,11 +2,9 @@ package by.javatr.library.controller.command.impl;
 
 import by.javatr.library.bean.Book;
 import by.javatr.library.controller.command.Command;
-import by.javatr.library.dao.exception.DAOException;
 import by.javatr.library.service.ClientService;
+import by.javatr.library.service.exception.ServiceException;
 import by.javatr.library.service.factory.ServiceFactory;
-
-import java.io.FileNotFoundException;
 
 public class Find implements Command {
     @Override
@@ -15,16 +13,17 @@ public class Find implements Command {
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ClientService clientService = null;
-        try {
-            clientService = serviceFactory.getClientService();
-        } catch (FileNotFoundException | DAOException e) {
-            e.printStackTrace();
-        }
+
+        clientService = serviceFactory.getClientService();
+
 
         if (clientService != null) {
-            for (Book book : clientService.findTheBook()) {
-                response += book.toString() + "\n";
-                //System.out.println(book);
+            try {
+                for (Book book : clientService.findTheBook()) {
+                    response += book.toString() + "\n";
+                }
+            } catch (ServiceException e) {
+                System.out.println("Sorry, we caught an error, try again later..");
             }
         } else response = "Error during load book's library procedure";
 

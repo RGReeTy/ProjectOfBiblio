@@ -5,6 +5,7 @@ import by.javatr.library.dao.daoimpl.BookDAOImpl;
 import by.javatr.library.dao.daoimpl.UserDAOImpl;
 import by.javatr.library.dao.exception.DAOException;
 import by.javatr.library.service.exception.ServiceException;
+import by.javatr.library.service.factory.BookBuilder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,7 +54,12 @@ public class ClientService {
         System.out.println("What about this book..");
         String info = reader.readLine();
 
-        bookDAO.addBook(new Book(bookName, author, typeOfBook, info));
+        bookDAO.addBook(new BookBuilder().withTitle(bookName)
+                .withAuthors(author)
+                .withTypeOfBook(typeOfBook)
+                .withInfo(info)
+                .build());
+
         try {
             bookDAO.saveLibraryToTXT();
         } catch (DAOException e) {

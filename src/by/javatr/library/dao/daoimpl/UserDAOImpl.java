@@ -1,5 +1,6 @@
 package by.javatr.library.dao.daoimpl;
 
+import by.javatr.library.bean.Book;
 import by.javatr.library.bean.User;
 import by.javatr.library.dao.FileDAO;
 import by.javatr.library.dao.UserDAO;
@@ -16,12 +17,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static by.javatr.library.service.validation.Validation.checkTheUserOnAuth;
+import static by.javatr.library.service.validation.Validation.cryptThePassword;
 
 
 public class UserDAOImpl implements UserDAO, FileDAO {
+
+    String address = "src\\by\\javatr\\library\\resource\\user\\users.txt";
+    private static final Map<Integer, User> clientList = new HashMap<Integer, User>();
+    private static int id = 0;
+    private User currentUser = new User();
+
     {
         try {
-            loadDataFromFile("src\\by\\javatr\\library\\resource\\user\\users.txt");
+            loadDataFromFile(address);
         } catch (FileNotFoundException ex) {
             try {
                 throw new DAOException("Error at loading User's list.", ex);
@@ -30,10 +38,6 @@ public class UserDAOImpl implements UserDAO, FileDAO {
             }
         }
     }
-
-    private static final Map<Integer, User> clientList = new HashMap<Integer, User>();
-    private static int id = 0;
-    private User currentUser = new User();
 
     @Override
     public boolean signIn(String login, String password) throws DAOException {
@@ -75,20 +79,32 @@ public class UserDAOImpl implements UserDAO, FileDAO {
         return currentUser;
     }
 
-    public void addUser(String login, String password) throws DAOException {
-        clientList.put(++id, new User(login, password, false));
-        try (FileWriter writer = new FileWriter("src\\by\\javatr\\library\\resource\\user\\users.txt", true)) {
-            writer.append(System.lineSeparator());
-            writer.write(login + " " + password + " " + "false");
-            writer.flush();
-        } catch (IOException ex) {
-            throw new DAOException("Error at loading User's list.", ex);
+    @Override
+    public void registration(String login, String password) throws DAOException {
+        //вставить валидацию, если юзер уже существует - вернуть false, нет - зарегистрировать + true
+        if (!signIn(login, password)) {
+            User registeredUser = new User();
+            registeredUser.setUserName(login);
+            registeredUser.setUserPassword(password);
+            registeredUser.setAdmin(false);
+            saveNewUserToFile(registeredUser);
+        }
+        try {
+            loadDataFromFile(address);
+        } catch (FileNotFoundException e) {
+            throw new DAOException("Error at finding user's list", e);
         }
     }
 
-    @Override
-    public boolean registration(User user) throws DAOException {
-        //вставить валидацию, если юзер уже существует - вернуть false, нет - зарегистрировать + true
-        return false;
+    public void saveNewUserToFile(User userForRegistr) throws DAOException {
+        try (FileWriter writer = new FileWriter("src\\by\\javatr\\library\\resource\\user\\users.txt", true)) {
+            writer.append(System.lineSeparator());
+            writer.write(userForRegistr.getUserName() + " "
+                    + cryptThePassword(userForRegistr.getUserPassword())
+                    + " " + userForRegistr.isAdmin());
+            writer.flush();
+        } catch (IOException ex) {
+            throw new DAOException("Error at saving new user", ex);
+        }
     }
 }

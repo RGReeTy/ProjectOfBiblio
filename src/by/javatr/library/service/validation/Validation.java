@@ -2,6 +2,9 @@ package by.javatr.library.service.validation;
 
 import by.javatr.library.bean.User;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Validation {
 
     public static boolean checkTheUserOnAuth(String login, String password, User user) {
@@ -17,4 +20,13 @@ public class Validation {
         }
         return cryptedWord;
     }
+
+    public static boolean checkAllSymbolsOnLetterOrWhitespaceRegEx(String login, String password) {
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9]{1,20}$");
+        Matcher matcherLogin = pattern.matcher(login);
+        Matcher matcherPassword = pattern.matcher(password);
+
+        return matcherLogin.find() & matcherPassword.find();
+    }
 }
+

@@ -11,7 +11,7 @@ public final class CommandProvider {
 
     public CommandProvider() {
         repository.put(CommandName.SIGN_IN, new SignIn());
-        repository.put(CommandName.REGISTRATION, new Register());
+        repository.put(CommandName.REGISTRATION, new Registration());
         repository.put(CommandName.SHOW, new Show());
         repository.put(CommandName.FIND, new Find());
         repository.put(CommandName.ADD_BOOK, new AddBook());

@@ -11,8 +11,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static by.javatr.library.service.validation.Validation.checkAllSymbolsOnLetterOrWhitespaceRegEx;
 
 public class ClientService {
     UserDAOImpl userDAO = new UserDAOImpl();
@@ -103,6 +106,24 @@ public class ClientService {
             }
         } else {
             System.out.println("\nOnly administrator can delete books!");
+        }
+    }
+
+    public boolean registerNewUser() throws ServiceException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter login:");
+        String login = scanner.nextLine();
+        System.out.println("Enter password:");
+        String password = scanner.nextLine();
+        if (checkAllSymbolsOnLetterOrWhitespaceRegEx(login, password)) {
+            try {
+                userDAO.registration(login, password);
+            } catch (DAOException e) {
+                throw new ServiceException("Error at saving new user");
+            }
+            return true;
+        } else {
+            throw new IllegalArgumentException("Wrong symbols at login/password! Needed A-Z, 0-9");
         }
     }
 }

@@ -20,11 +20,11 @@ public class Menu {
         if (access.equals("Welcome")) {
             workWithLibrary();
         } else {
-            System.out.println("Access denied!");
+            registerNewUser();
         }
     }
 
-    public void workWithLibrary() {
+    private void workWithLibrary() {
         System.out.println(OPTIONS_USER);
 
         request = scanner.nextLine();
@@ -36,5 +36,13 @@ public class Menu {
             System.out.println(response);
             workWithLibrary();
         }
+    }
+
+    private void registerNewUser() {
+        System.out.println("Do you want to register as a new user? (Y/N)");
+        if (scanner.nextLine().equalsIgnoreCase("Y")) {
+            controller.executeTask("REGISTRATION");
+        }
+        run();
     }
 }

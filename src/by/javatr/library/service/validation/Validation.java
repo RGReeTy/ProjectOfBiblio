@@ -5,7 +5,8 @@ import by.javatr.library.bean.User;
 public class Validation {
 
     public static boolean checkTheUserOnAuth(String login, String password, User user) {
-        return user.getUserName().equalsIgnoreCase(login) & user.getUserPassword().equalsIgnoreCase(cryptThePassword(password));
+        return user.getUserName().equalsIgnoreCase(login)
+                & user.getUserPassword().equalsIgnoreCase(cryptThePassword(password));
     }
 
     public static String cryptThePassword(String password) {

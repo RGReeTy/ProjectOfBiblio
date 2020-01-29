@@ -23,35 +23,35 @@ public class Book implements Serializable {
         this.id = ++genID;
     }
 
-    public String getBookName() {
+    public final String getBookName() {
         return bookName;
     }
 
-    public void setBookName(String bookName) {
+    public final void setBookName(String bookName) {
         this.bookName = bookName;
     }
 
-    public String getAuthor() {
+    public final String getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public final void setAuthor(String author) {
         this.author = author;
     }
 
-    public String getTypeOfBook() {
+    public final String getTypeOfBook() {
         return typeOfBook;
     }
 
-    public void setTypeOfBook(String typeOfBook) {
+    public final void setTypeOfBook(String typeOfBook) {
         this.typeOfBook = typeOfBook;
     }
 
-    public String getAboutBook() {
+    public final String getAboutBook() {
         return aboutBook;
     }
 
-    public void setAboutBook(String aboutBook) {
+    public final void setAboutBook(String aboutBook) {
         this.aboutBook = aboutBook;
     }
 

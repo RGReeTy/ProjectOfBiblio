@@ -18,27 +18,27 @@ public class User implements Serializable {
         this.isAdmin = isAdmin;
     }
 
-    public String getUserName() {
+    public final String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public final void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public String getUserPassword() {
+    public final String getUserPassword() {
         return userPassword;
     }
 
-    public void setUserPassword(String userPassword) {
+    public final void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
 
-    public boolean isAdmin() {
+    public final boolean isAdmin() {
         return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
+    public final void setAdmin(boolean admin) {
         isAdmin = admin;
     }
 

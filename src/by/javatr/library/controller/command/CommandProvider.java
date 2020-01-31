@@ -28,7 +28,7 @@ public final class CommandProvider {
             command = repository.get(commandName);
         } catch (IllegalArgumentException | NullPointerException e) {
             command = repository.get(CommandName.WRONG_REQUEST);
-            e.printStackTrace();
+
         }
         return command;
     }

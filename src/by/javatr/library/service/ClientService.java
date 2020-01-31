@@ -57,7 +57,8 @@ public class ClientService {
         System.out.println("What about this book..");
         String info = reader.readLine();
 
-        bookDAO.addBook(new BookBuilder().withTitle(bookName)
+        bookDAO.addBook(new BookBuilder()
+                .withTitle(bookName)
                 .withAuthors(author)
                 .withTypeOfBook(typeOfBook)
                 .withInfo(info)

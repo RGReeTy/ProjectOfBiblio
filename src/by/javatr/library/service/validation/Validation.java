@@ -13,10 +13,11 @@ public class Validation {
     }
 
     public static String cryptThePassword(String password) {
+        final int plusStepForChar = 13;
         String cryptedWord = "";
         char[] symbols = password.toCharArray();
         for (char ch : symbols) {
-            cryptedWord += (ch + 13);
+            cryptedWord += (ch + plusStepForChar);
         }
         return cryptedWord;
     }

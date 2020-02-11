@@ -1,3 +1,4 @@
-out
-.idea
+# IntellijIdea files
 *.iml
+.idea
+out
